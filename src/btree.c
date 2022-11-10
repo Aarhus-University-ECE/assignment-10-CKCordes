@@ -63,19 +63,24 @@ struct tree_node *Remove(int x, struct tree_node *t) {
             return newInPlace;
         } else {
             // If it has two children i set a temporary pointer equal to one
-            // step to the right, and then i run it as far left as possible
+            // step to the right of the current tree node, and then i run it as
+            // far left as possible
 
             struct tree_node *temp = t->right;
             while (temp->left != NULL) {
                 temp = temp->left;
             }
-            // I give the
+            // I give the node we wish to swap out, the smallest of the bigger
+            // numbers of the current tree node, and afterwards i free the
+            // temporary pointer. This effectivly swaps the two nodes
             t->item = temp->item;
             free(temp);
             return t;
         }
     }
-
+    // the recursive step, if the number we wish to remove is greater, we
+    // traverse to the right, and likewise if x is smaller than the current
+    // node, we traverse left
     else if (x > t->item) {
         printf("\nSearching right\n");
         t->right = Remove(x, t->right);
@@ -89,15 +94,17 @@ struct tree_node *Remove(int x, struct tree_node *t) {
 }
 
 int Contains(int x, struct tree_node *t) {
-    // Return true if the tree t contains item x. Return false otherwise.
-
+    // Returns true if the tree t contains item x. Returns false otherwise.
+    // If the tree is empty, its false
     if (Empty(t)) {
         return 0;
     }
+    // Base case
     if (x == t->item) {
         return 1;
-        printf("contains %d\n", x);
-    } else if (x > t->item) {
+    }
+    // Recursive step
+    else if (x > t->item) {
         return Contains(x, t->right);
     } else if (x < t->item) {
         return Contains(x, t->left);
@@ -106,11 +113,13 @@ int Contains(int x, struct tree_node *t) {
 }
 
 struct tree_node *Initialize(struct tree_node *t) {
+    // Initializing by assigning t as NULL, that there is no memory allocation
     t = NULL;
     return t;
 }
 
 int Empty(struct tree_node *t) {
+    // yeps
     if (t == NULL) {
         return 1;
     } else {
