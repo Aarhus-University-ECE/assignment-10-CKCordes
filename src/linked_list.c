@@ -36,21 +36,26 @@ void print_list(node *p) {
 }
 
 int sum_squares(node *p) {
+    // Basecase
     if (p == NULL) {
         return 0;
     } else {
+        // returning the current value squared, added with the next values
+        // squared
         return p->value * p->value + sum_squares(p->next);
     }
-    // Add your code for excercise 2
-    // You can find the tests in tests.cpp
 }
 
 typedef int (*fn_int_to_int)(int);
 
 node *map(node *p, fn_int_to_int f) {
+    // Basecase
     if (p == NULL) {
         return NULL;
     } else {
+        // Since we are making a new list, we must return a node, the value of
+        // that node being the squared value of pvalue, and the next node being
+        // the next map made node
         return make_node(f(p->value), map(p->next, f));
     }
 }
