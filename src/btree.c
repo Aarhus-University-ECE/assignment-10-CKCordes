@@ -82,11 +82,9 @@ struct tree_node *Remove(int x, struct tree_node *t) {
     // traverse to the right, and likewise if x is smaller than the current
     // node, we traverse left
     else if (x > t->item) {
-        printf("\nSearching right\n");
         t->right = Remove(x, t->right);
 
     } else if (x < t->item) {
-        printf("\nSearching left\n");
         t->left = Remove(x, t->left);
     }
 
