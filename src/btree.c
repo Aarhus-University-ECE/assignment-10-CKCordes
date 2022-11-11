@@ -71,10 +71,10 @@ struct tree_node *Remove(int x, struct tree_node *t) {
                 temp = temp->left;
             }
             // I give the node we wish to swap out, the smallest of the bigger
-            // numbers of the current tree node, and afterwards i free the
+            // numbers of the current tree node, and afterwards i remove the
             // temporary pointer. This effectivly swaps the two nodes
             t->item = temp->item;
-            free(temp);
+            Remove(x, temp);
             return t;
         }
     }
